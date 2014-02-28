@@ -46,6 +46,9 @@
 
 package javaexercises.difficult;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 public class DateUtil {
     
     private final int MIN_YEAR = 1;
@@ -83,6 +86,13 @@ public class DateUtil {
         System.out.println(aDateUtil.getDayOfWeek(2000, 1, 1));   // 6:Sat
         System.out.println(aDateUtil.getDayOfWeek(2054, 6, 19));  // 5:Fri
         System.out.println(aDateUtil.getDayOfWeek(2012, 2, 17));  // 5:Fri
+        
+        // test
+        aDateUtil.getDayOfWeekTest(1982, 4, 24);
+        aDateUtil.getDayOfWeekTest(2000, 1, 1);
+        aDateUtil.getDayOfWeekTest(2054, 6, 19);
+        aDateUtil.getDayOfWeekTest(2012, 2, 17);
+
 
         System.out.println(aDateUtil.toString(2012, 2, 14)); // Tuesday 14 Feb 2012
         System.out.println(aDateUtil.toString(2014, 2, 26)); // Wednesday 26 Feb 2014
@@ -144,6 +154,17 @@ public class DateUtil {
         // 6. The sum modulus 7 gives the day of the week, where 0 for SUN, 1 for MON, ..., 6 for SAT.
         return (  magicCenturyNumber + lastTwoDigitsOfYear 
                 + magicYearNumber    + magicMonthNumber + magicDayNumber) % 7;
+    }
+    
+    // test method getDayOfWeek()
+    private void getDayOfWeekTest(int year, int month, int day) {
+        Calendar cal = new GregorianCalendar(year, month - 1, day);  // month is 0-based
+        // Get the day of the week number: 1 (Sunday) to 7 (Saturday)
+        int dayNumber = cal.get(Calendar.DAY_OF_WEEK);
+        String[] calendarDays = { "Sunday", "Monday", "Tuesday", "Wednesday",
+                                  "Thursday", "Friday", "Saturday" };
+        // Print result
+        System.out.println("It is " + calendarDays[dayNumber - 1]);
     }
     
     // Return String "xxxday d mmm yyyy" (e.g., Wednesday 29 Feb 2012)
